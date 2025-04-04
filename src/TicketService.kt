@@ -66,4 +66,21 @@ class TicketService {
         ticketList.removeAt(id)
         println("Deleted ticket #$id")
     }
+
+    fun ticketPriceSum(): Double {
+        var sum = 0.0;
+        ticketList.forEach { sum += it.price }
+        return sum
+    }
+
+    fun averageTicketPrice(): Double {
+        if (ticketList.size < 1) { return -1.0 }
+        return ticketPriceSum()/ticketList.size
+    }
+
+    fun mostExpensiveTicket(): Ticket {
+        val copy = ticketList
+        copy.sortBy { it.price }
+        return copy[0]
+    }
 }
